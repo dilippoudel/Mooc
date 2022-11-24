@@ -1,12 +1,15 @@
 const Header = (props) => {
   return <h1 className="course">{props.header}</h1>
 }
-const Content = (props) => {
+const Part = (props) => {
   return (
     <p className="text">
-      {props.text} {props.exercise}
+      {props.names} {props.exercise}
     </p>
   )
+}
+const Content = (props) => {
+  return <Part names={props.text} exercise={props.exercise} />
 }
 const Total = (props) => {
   return <p className="result text">Number of exercise {props.total}</p>
