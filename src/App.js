@@ -29,6 +29,10 @@ const App = () => {
     }
     setCountFeedback(newState)
   }
+  let totalFeedback =
+    countFeedBack.good + countFeedBack.bad + countFeedBack.neutral
+  let goodFeedback = countFeedBack.good - countFeedBack.bad
+
   return (
     <div className="container">
       <Heading text="give feedback" />
@@ -39,6 +43,8 @@ const App = () => {
       <p>good {countFeedBack.good}</p>
       <p>neutral {countFeedBack.neutral}</p>
       <p>bad {countFeedBack.bad}</p>
+      <p>average {goodFeedback / totalFeedback}</p>
+      <p>positive {(countFeedBack.good / totalFeedback) * 100} %</p>
     </div>
   )
 }
