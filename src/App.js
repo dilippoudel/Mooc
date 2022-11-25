@@ -3,9 +3,14 @@ const Heading = ({ text }) => <h2>{text}</h2>
 const Button = ({ text, onClick }) => <button onClick={onClick}>{text}</button>
 const StatisticLine = ({ text, value }) => {
   return (
-    <p>
-      {text} {value}
-    </p>
+    <table>
+      <tbody>
+        <tr>
+          <td>{text}</td>
+          <td>{value}</td>
+        </tr>
+      </tbody>
+    </table>
   )
 }
 // Statics components
@@ -20,11 +25,18 @@ const Statistics = (props) => {
       <StatisticLine text="good" value={good} />
       <StatisticLine text="neutral" value={neutral} />
       <StatisticLine text="bad" value={bad} />
+      <StatisticLine text="all" value={totalFeedback} />
 
       {doWeHaveFeedback ? (
         <div>
-          <p>average {goodFeedback / totalFeedback}</p>
-          <p>positive {(good / totalFeedback) * 100} %</p>
+          <StatisticLine
+            text="average"
+            value={(goodFeedback / totalFeedback).toFixed(1)}
+          />
+          <StatisticLine
+            text="positive"
+            value={`${((good / totalFeedback) * 100).toFixed(1)}%`}
+          />
         </div>
       ) : (
         <p>No feedback given</p>
