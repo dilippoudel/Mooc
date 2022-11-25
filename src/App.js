@@ -1,6 +1,22 @@
 import { useState } from 'react'
 const Heading = ({ text }) => <h2>{text}</h2>
 const Button = ({ text, onClick }) => <button onClick={onClick}>{text}</button>
+// Statics components
+const Statistics = (props) => {
+  let { good, neutral, bad } = props.countFeedBack
+  let goodFeedback = good - bad
+  let totalFeedback = good + bad + neutral
+  return (
+    <div>
+      <Heading text="statistics" />
+      <p>good {good}</p>
+      <p>neutral {neutral}</p>
+      <p>bad {bad}</p>
+      <p>average {goodFeedback / totalFeedback}</p>
+      <p>positive {(good / totalFeedback) * 100} %</p>
+    </div>
+  )
+}
 const App = () => {
   const [countFeedBack, setCountFeedback] = useState({
     good: 0,
@@ -29,9 +45,6 @@ const App = () => {
     }
     setCountFeedback(newState)
   }
-  let totalFeedback =
-    countFeedBack.good + countFeedBack.bad + countFeedBack.neutral
-  let goodFeedback = countFeedBack.good - countFeedBack.bad
 
   return (
     <div className="container">
@@ -39,12 +52,7 @@ const App = () => {
       <Button text="good" onClick={goodFeedbackHandler} />
       <Button text="neutral" onClick={neutralFeedbackHandler} />
       <Button text="bad" onClick={badFeedbackHandler} />
-      <Heading text="statistics" />
-      <p>good {countFeedBack.good}</p>
-      <p>neutral {countFeedBack.neutral}</p>
-      <p>bad {countFeedBack.bad}</p>
-      <p>average {goodFeedback / totalFeedback}</p>
-      <p>positive {(countFeedBack.good / totalFeedback) * 100} %</p>
+      <Statistics countFeedBack={countFeedBack} />
     </div>
   )
 }
