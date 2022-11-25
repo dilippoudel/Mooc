@@ -1,19 +1,25 @@
 import { useState } from 'react'
 const Heading = ({ text }) => <h2>{text}</h2>
 const Button = ({ text, onClick }) => <button onClick={onClick}>{text}</button>
+const StatisticLine = ({ text, value }) => {
+  return (
+    <p>
+      {text} {value}
+    </p>
+  )
+}
 // Statics components
 const Statistics = (props) => {
   let { good, neutral, bad } = props.countFeedBack
-  console.log(good)
   let goodFeedback = good - bad
   let totalFeedback = good + bad + neutral
   let doWeHaveFeedback = good || bad || neutral
   return (
     <div>
       <Heading text="statistics" />
-      <p>good {good}</p>
-      <p>neutral {neutral}</p>
-      <p>bad {bad}</p>
+      <StatisticLine text="good" value={good} />
+      <StatisticLine text="neutral" value={neutral} />
+      <StatisticLine text="bad" value={bad} />
 
       {doWeHaveFeedback ? (
         <div>
