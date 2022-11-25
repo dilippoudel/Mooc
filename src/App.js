@@ -1,57 +1,44 @@
-const Header = (props) => {
-  return <h1 className="course">{props.header}</h1>
-}
-const Part = (props) => {
-  return (
-    <p className="text">
-      {props.names} {props.exercise}
-    </p>
-  )
-}
-const Content = (props) => {
-  return (
-    <div className="content">
-      <Part names={props.parts[0].name} exercise={props.parts[0].exercises} />
-      <Part names={props.parts[1].name} exercise={props.parts[1].exercises} />
-      <Part names={props.parts[2].name} exercise={props.parts[2].exercises} />
-    </div>
-  )
-}
-const Total = (props) => {
-  return (
-    <p className="result text">
-      Number of exercise{' '}
-      {props.parts[0].exercises +
-        props.parts[1].exercises +
-        props.parts[2].exercises}
-    </p>
-  )
-}
+import { useState } from 'react'
+const Heading = ({ text }) => <h2>{text}</h2>
+const Button = ({ text, onClick }) => <button onClick={onClick}>{text}</button>
 const App = () => {
-  const course = {
-    name: 'Half Stack application development',
-    parts: [
-      {
-        name: 'Fundamentals of React',
-        exercises: 10,
-      },
-      {
-        name: 'using props to pass data',
-        exercises: 7,
-      },
-      {
-        name: 'State of a component',
-        exercises: 14,
-      },
-    ],
-  }
+  const [countFeedBack, setCountFeedback] = useState({
+    good: 0,
+    neutral: 0,
+    bad: 0,
+  })
 
+  const goodFeedbackHandler = () => {
+    let newState = {
+      ...countFeedBack,
+      good: countFeedBack.good + 1,
+    }
+    setCountFeedback(newState)
+  }
+  const neutralFeedbackHandler = () => {
+    let newState = {
+      ...countFeedBack,
+      neutral: countFeedBack.neutral + 1,
+    }
+    setCountFeedback(newState)
+  }
+  const badFeedbackHandler = () => {
+    let newState = {
+      ...countFeedBack,
+      bad: countFeedBack.bad + 1,
+    }
+    setCountFeedback(newState)
+  }
   return (
     <div className="container">
-      <Header header={course.name} />
-      <Content parts={course.parts} />
-
-      <Total parts={course.parts} />
+      <Heading text="give feedback" />
+      <Button text="good" onClick={goodFeedbackHandler} />
+      <Button text="neutral" onClick={neutralFeedbackHandler} />
+      <Button text="bad" onClick={badFeedbackHandler} />
+      <Heading text="statistics" />
+      <p>good {countFeedBack.good}</p>
+      <p>neutral {countFeedBack.neutral}</p>
+      <p>bad {countFeedBack.bad}</p>
     </div>
   )
 }
