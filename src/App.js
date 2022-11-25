@@ -1,4 +1,6 @@
 import { useState } from 'react'
+const Heading = ({ text }) => <h2>{text}</h2>
+const Button = ({ text, onClick }) => <button onClick={onClick}>{text}</button>
 
 const App = () => {
   const anecdotes = [
@@ -25,11 +27,15 @@ const App = () => {
   }
   return (
     <div>
+      <Heading text="Anecdote of the day" />
       {anecdotes[selected]}
       <p>has {voteCount[selected]} votes</p>
       <div>
-        <button onClick={voteCountHandler}>Vote</button>
-        <button onClick={nextAnecdoteHandler}>next anecdote</button>
+        <Button onClick={voteCountHandler} text="Vote" />
+        <Button onClick={nextAnecdoteHandler} text="next anecdote" />
+      </div>
+      <div>
+        <Heading text="Anecdote with most votes" />
       </div>
     </div>
   )
